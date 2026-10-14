@@ -20,7 +20,7 @@ export interface Project {
   title: string;
   description: string;
   tech: string[];
-  /** Imagen en /public (ej: 'projects/mi-app.png'). Si no hay, se muestra un degradado. */
+  /** Imagen en /public (ej: 'projects/mi-app.png'). Si no hay, la tarjeta se muestra sin portada. */
   image?: string;
   repo?: string;
   demo?: string;
@@ -83,7 +83,12 @@ const shared = {
   // Agrega aquí tu GitHub y LinkedIn, por ejemplo:
   // { label: 'GitHub', url: 'https://github.com/tu-usuario', icon: 'github' },
   // { label: 'LinkedIn', url: 'https://linkedin.com/in/tu-usuario', icon: 'linkedin' },
-  socials: [{ label: 'Email', url: 'mailto:josec.araujom@gmail.com', icon: 'mail' }] as Social[],
+  socials: [
+    { label: 'Email', url: 'mailto:josec.araujom@gmail.com', icon: 'mail' }, 
+    { label: 'GitHub', url: 'https://github.com/JoseCarlos2496', icon: 'github' }, 
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/araujojc96', icon: 'linkedin' },
+    { label: 'Discord', url: 'https://discord.com/users/513935615440584705', icon: 'discord' },
+  ] as Social[],
   courses: [
     'Udemy — JavaScript and React for Beginners: Create 12 projects',
     'Udemy — React Native Expo: Creando un TripAdvisor de Restaurantes',
@@ -98,19 +103,19 @@ const shared = {
 };
 
 const tech = {
-  publipromueve: ['.NET 8', '.NET 9', 'C#', 'Jira'],
+  publipromueve: ['.NET 8', '.NET 9', '.NET 10', 'C#', 'Jira', 'PostgreSQL', 'Redis', 'AWS'],
   freelance: ['UI/UX', 'Web', 'CMS'],
   banco: ['C#', 'ASP.NET', '.NET Core', 'MVC 5', 'SQL Server', 'REST', 'SOAP'],
   goforcustomer: ['ASP.NET Core', 'Entity Framework', 'Dapper', 'SQL Server', 'Azure DevOps', 'Genesys Cloud'],
   clearminds: ['Java', 'JavaScript', 'MySQL', 'Liquibase', 'AWS', 'Jenkins'],
   sherwin: ['Soporte', 'Windows'],
-  ute: ['Java', 'JSF'],
+  ute: ['Java', 'JSF', 'SQL Server'],
 };
 
 const skillItems = {
-  backend: ['C#', '.NET Core / .NET 9', '.NET Framework', 'ASP.NET MVC', 'Entity Framework', 'Dapper', 'Java', 'NestJS', 'REST', 'SOAP'],
+  backend: ['C#', '.NET Core', '.NET Framework', 'ASP.NET MVC', 'Entity Framework', 'Dapper', 'Java', 'Node.js', 'NestJS', 'REST', 'SOAP'],
   frontend: ['Angular', 'React', 'TypeScript', 'JavaScript', 'CMS'],
-  data: ['SQL Server', 'PostgreSQL', 'MySQL', 'Liquibase'],
+  data: ['SQL Server', 'PostgreSQL', 'MySQL', 'Liquibase', 'Redis', 'MongoDB'],
   tools: ['Azure', 'AWS', 'Jenkins', 'Jira', 'Genesys Cloud', 'Office'],
 };
 
@@ -230,16 +235,6 @@ export const PROFILES: Record<Lang, Profile> = {
         tech: ['Web', 'UI/UX'],
         demo: 'https://midecar.ec',
       },
-      {
-        title: 'Flyer Shop',
-        description: 'Tienda en línea de flyers desarrollada como proyecto personal.',
-        tech: ['React'],
-      },
-      {
-        title: 'Rutas de buses urbanos',
-        description: 'Aplicación para registrar las rutas de buses urbanos.',
-        tech: ['React'],
-      },
     ],
     skills: [
       { title: 'Backend', items: skillItems.backend },
@@ -349,7 +344,7 @@ export const PROFILES: Record<Lang, Profile> = {
     ],
     projects: [
       {
-        title: 'Community Mediation',
+        title: 'Mediación Comunitaria',
         description:
           'UI/UX design and full implementation of the web platform for the PRD (ARES / CCD) community mediation project, 2017 — 2023.',
         tech: ['UI/UX', 'Web'],
@@ -368,16 +363,6 @@ export const PROFILES: Record<Lang, Profile> = {
           'Business website for a temporary customs warehousing company, presenting its logistics and foreign trade services.',
         tech: ['Web', 'UI/UX'],
         demo: 'https://midecar.ec',
-      },
-      {
-        title: 'Flyer Shop',
-        description: 'Online flyer store built as a personal project.',
-        tech: ['React'],
-      },
-      {
-        title: 'Urban Bus Routes',
-        description: 'Application for registering urban bus routes.',
-        tech: ['React'],
       },
     ],
     skills: [
