@@ -1,0 +1,339 @@
+// ───────── Tema ─────────
+:root {
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  // Colores tomados del logo (JC): rojo neón → morado → azul
+  --brand-red: #ff3d68;
+  --brand-purple: #9b4dff;
+  --brand-blue: #3d7bff;
+  // Predomina el azul marino; el rojo del logo queda solo en el propio logo
+  --gradient: linear-gradient(100deg, #5b21b6, #2563eb 50%, #1e3a8a);
+  --gradient-text: linear-gradient(100deg, #a78bfa, #5b8cff 45%, #7cb3ff);
+
+  // Azul marino
+  --bg: #0a1224;
+  --bg-elevated: #0e1830;
+  --surface: #14213f;
+  --line: #213258;
+  --grid: rgb(140 170 255 / 0.04);
+  --glow-1: rgb(255 61 104 / 0.07);
+  --glow-2: rgb(61 123 255 / 0.22);
+  --text: #eef2fb;
+  --muted: #93a2c3;
+  --accent: var(--brand-blue);
+  --accent-2: var(--brand-purple);
+  --accent-text: #7cb3ff;
+  --accent-ink: #ffffff;
+  --success: #4ade80;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --brand-red: #e11d48;
+  --brand-purple: #7c3aed;
+  --brand-blue: #2563eb;
+
+  --bg: #f3f6fc;
+  --bg-elevated: #ffffff;
+  --surface: #e8eef9;
+  --line: #d3dcef;
+  --grid: rgb(15 40 100 / 0.05);
+  --glow-1: rgb(225 29 72 / 0.05);
+  --glow-2: rgb(37 99 235 / 0.12);
+  --text: #0c1a3a;
+  --muted: #4d5b7c;
+  --accent-text: #1d4ed8;
+  --success: #15803d;
+
+  color-scheme: light;
+}
+
+// ───────── Base ─────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  // Cuadrícula sutil de fondo
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-attachment: fixed;
+  background-position: center top;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(700px circle at 10% -10%, var(--glow-1), transparent 70%),
+    radial-gradient(700px circle at 90% 0%, var(--glow-2), transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 0%, transparent, var(--bg) 70%);
+  pointer-events: none;
+}
+
+main,
+app-root {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+// ───────── Layout ─────────
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  @media (max-width: 560px) {
+    padding-inline: 16px;
+  }
+}
+
+.section {
+  padding-block: clamp(64px, 10vw, 120px);
+  scroll-margin-top: 40px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    align-self: center;
+    background: var(--line);
+  }
+}
+
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-text);
+}
+
+// ───────── Componentes compartidos ─────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 500;
+  transition:
+    transform 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--muted);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  border-color: transparent;
+  background: var(--gradient);
+  color: #fff;
+
+  &:hover {
+    border-color: transparent;
+    box-shadow:
+      -8px 10px 30px -12px var(--brand-red),
+      8px 10px 30px -12px var(--brand-blue);
+  }
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--muted);
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    color: var(--text);
+    border-color: var(--muted);
+    transform: translateY(-2px);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.tag {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+// Texto justificado; los guiones automáticos (según <html lang>) evitan huecos entre palabras.
+// En celulares la columna es angosta y quedan huecos grandes, así que ahí se alinea a la izquierda.
+.justify {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+  @media (min-width: 640px) {
+    text-align: justify;
+  }
+}
+
+// ───────── Resplandor de tarjetas (directiva appGlowCards) ─────────
+.glow-card {
+  --glow-color: var(--brand-blue);
+  position: relative;
+  transition: background-color 0.4s;
+
+  // Borde y tinte de color visibles solo alrededor del cursor
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    border: 1px solid var(--glow-color);
+    box-shadow: 0 0 0 1px inset var(--glow-color);
+    background: color-mix(in srgb, var(--glow-color) 12%, transparent);
+    opacity: var(--glow-opacity, 0);
+    -webkit-mask: radial-gradient(
+      25rem 25rem at var(--glow-x, -100rem) var(--glow-y, -100rem),
+      #000 1%,
+      transparent 50%
+    );
+    mask: radial-gradient(
+      25rem 25rem at var(--glow-x, -100rem) var(--glow-y, -100rem),
+      #000 1%,
+      transparent 50%
+    );
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  // .glow-cards delante para ganar a los estilos de cada componente
+  .glow-cards &:hover {
+    background-color: color-mix(in srgb, var(--glow-color) 6%, var(--bg-elevated));
+  }
+
+  &:nth-child(3n + 2) {
+    --glow-color: var(--brand-purple);
+  }
+
+  &:nth-child(3n + 3) {
+    --glow-color: #38bdf8;
+  }
+}
+
+// ───────── Animación de aparición ─────────
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

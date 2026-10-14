@@ -1,0 +1,47 @@
+<div class="bar container">
+  <a class="logo" href="#inicio" [attr.aria-label]="i18n.t().home">
+    <img class="logo-img" [src]="i18n.profile().logo" alt="" width="42" height="42" />
+  </a>
+
+  <nav class="nav" [class.open]="menuOpen()" [attr.aria-label]="i18n.t().mainNav">
+    @for (link of links(); track link.id) {
+      <a
+        [href]="'#' + link.id"
+        [class.active]="active() === link.id"
+        [attr.aria-current]="active() === link.id ? 'location' : null"
+        (click)="menuOpen.set(false)"
+        >{{ link.label }}</a
+      >
+    }
+  </nav>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="lang-btn"
+      (click)="i18n.toggle()"
+      [attr.aria-label]="i18n.t().switchLang"
+      [title]="i18n.t().switchLang"
+    >
+      <span [class.on]="i18n.lang() === 'es'">ES</span>
+      <span [class.on]="i18n.lang() === 'en'">EN</span>
+    </button>
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.theme() === 'dark' ? i18n.t().themeToLight : i18n.t().themeToDark"
+    >
+      <app-icon [name]="theme.theme() === 'dark' ? 'sun' : 'moon'" [size]="18" />
+    </button>
+    <button
+      type="button"
+      class="icon-btn menu-btn"
+      (click)="menuOpen.set(!menuOpen())"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="i18n.t().openMenu"
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="18" />
+    </button>
+  </div>
+</div>

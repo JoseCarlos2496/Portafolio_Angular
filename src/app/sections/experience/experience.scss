@@ -1,0 +1,128 @@
+.timeline {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.job {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+}
+
+.period {
+  padding-top: 26px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+// Color del resplandor (appGlowCards) por trabajo
+.job:nth-child(3n + 1) .card {
+  --glow-color: var(--brand-blue);
+}
+
+.job:nth-child(3n + 2) .card {
+  --glow-color: var(--brand-purple);
+}
+
+.job:nth-child(3n + 3) .card {
+  --glow-color: #38bdf8;
+}
+
+.card {
+  padding: 24px 24px 24px 32px;
+  border-left: 1px solid var(--line);
+  border-radius: 0 16px 16px 0;
+
+  // Punto de la línea de tiempo (::before lo usa el resplandor)
+  &::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: -5px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--muted);
+    transition:
+      border-color 0.25s,
+      background-color 0.25s;
+  }
+
+  &:hover::after {
+    border-color: var(--glow-color);
+    background: var(--glow-color);
+  }
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.at {
+  margin: 0 4px;
+  color: var(--muted);
+}
+
+.company {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--accent-text);
+}
+
+a.company:hover app-icon {
+  transform: translate(2px, -2px);
+}
+
+app-icon {
+  transition: transform 0.2s;
+}
+
+.highlights {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+  max-width: 66ch;
+  list-style: none;
+  color: var(--muted);
+
+  li {
+    position: relative;
+    padding-left: 18px;
+
+    &::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-text);
+    }
+  }
+}
+
+.tags {
+  margin-top: 16px;
+}
+
+@media (max-width: 720px) {
+  .job {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .period {
+    padding: 0 0 0 32px;
+    border-left: 1px solid var(--line);
+  }
+
+  .card {
+    padding-top: 8px;
+
+    &::after {
+      top: -14px;
+    }
+  }
+}

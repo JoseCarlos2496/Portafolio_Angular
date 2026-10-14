@@ -1,0 +1,38 @@
+<section id="experiencia" class="section container">
+  <header class="section-head" appReveal>
+    <span class="section-index">01</span>
+    <h2>{{ i18n.t().nav.experience }}</h2>
+  </header>
+
+  <ol class="timeline" appGlowCards>
+    @for (job of i18n.profile().experience; track job.company; let i = $index) {
+      <li class="job" [appReveal]="i * 80">
+        <p class="period">{{ job.period }}</p>
+        <div class="card glow-card">
+          <h3>
+            {{ job.role }}
+            <span class="at">·</span>
+            @if (job.url) {
+              <a class="company" [href]="job.url" target="_blank" rel="noopener">
+                {{ job.company }}
+                <app-icon name="arrow" [size]="16" />
+              </a>
+            } @else {
+              <span class="company">{{ job.company }}</span>
+            }
+          </h3>
+          <ul class="highlights justify">
+            @for (h of job.highlights; track $index) {
+              <li>{{ h }}</li>
+            }
+          </ul>
+          <ul class="tags">
+            @for (t of job.tech; track t) {
+              <li class="tag">{{ t }}</li>
+            }
+          </ul>
+        </div>
+      </li>
+    }
+  </ol>
+</section>

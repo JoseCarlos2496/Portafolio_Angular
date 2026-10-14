@@ -1,0 +1,42 @@
+<section id="proyectos" class="section container">
+  <header class="section-head" appReveal>
+    <span class="section-index">02</span>
+    <h2>{{ i18n.t().nav.projects }}</h2>
+  </header>
+
+  <div class="grid" appGlowCards>
+    @for (project of i18n.profile().projects; track $index; let i = $index) {
+      <article class="project glow-card" [appReveal]="(i % 2) * 100">
+        <div class="cover" [class.flip]="i % 2 === 1">
+          @if (project.image) {
+            <img [src]="project.image" [alt]="i18n.t().projects.screenshotAlt + ' ' + project.title" loading="lazy" />
+          } @else {
+            <span class="cover-title" aria-hidden="true">{{ project.title }}</span>
+          }
+        </div>
+
+        <div class="body">
+          <h3>{{ project.title }}</h3>
+          <p class="justify">{{ project.description }}</p>
+          <ul class="tags">
+            @for (t of project.tech; track t) {
+              <li class="tag">{{ t }}</li>
+            }
+          </ul>
+          <div class="links">
+            @if (project.repo) {
+              <a [href]="project.repo" target="_blank" rel="noopener">
+                <app-icon name="github" [size]="16" /> {{ i18n.t().projects.code }}
+              </a>
+            }
+            @if (project.demo) {
+              <a [href]="project.demo" target="_blank" rel="noopener">
+                <app-icon name="arrow" [size]="16" /> {{ i18n.t().projects.visit }}
+              </a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,103 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  transition:
+    background-color 0.4s,
+    transform 0.25s;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .cover-title {
+      transform: scale(1.05) rotate(-2deg);
+    }
+  }
+}
+
+.cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at var(--c1, 20% 30%), color-mix(in srgb, var(--brand-purple) 30%, transparent), transparent 55%),
+    radial-gradient(circle at var(--c2, 85% 80%), color-mix(in srgb, var(--brand-blue) 60%, transparent), transparent 60%),
+    var(--surface);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Alterna la posición de los colores entre tarjetas
+.cover.flip {
+  --c1: 80% 25%;
+  --c2: 15% 85%;
+}
+
+.cover-title {
+  padding: 0 24px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: var(--text);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: var(--muted);
+  }
+}
+
+.links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+  margin-top: auto;
+  padding-top: 8px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+
+    &:hover {
+      color: var(--accent-text);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

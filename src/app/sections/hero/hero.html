@@ -1,0 +1,70 @@
+@let p = i18n.profile();
+@let t = i18n.t().hero;
+<section id="inicio" class="hero container">
+  <div class="intro">
+    @if (p.available) {
+      <p class="badge" appReveal>
+        <span class="pulse" aria-hidden="true"></span>
+        {{ t.available }}
+      </p>
+    }
+
+    <h1 appReveal="80">
+      {{ t.greeting }} <span class="name">{{ p.name }}</span>
+    </h1>
+    <p class="role" appReveal="140">{{ p.role }}</p>
+
+    <p class="headline" appReveal="200">{{ p.headline }}</p>
+    <p class="summary justify" appReveal="240">{{ p.summary }}</p>
+
+    <div class="cta" appReveal="300">
+      <a class="btn btn-primary" href="#contacto">
+        {{ t.contact }}
+        <app-icon name="arrow" [size]="18" />
+      </a>
+      @if (p.cv) {
+        <a class="btn" [href]="p.cv" download>
+          <app-icon name="download" [size]="18" />
+          {{ t.cv }}
+        </a>
+      }
+    </div>
+
+    <ul class="socials" appReveal="360">
+      @for (social of p.socials; track social.url) {
+        <li>
+          <a class="icon-btn" [href]="social.url" target="_blank" rel="noopener" [attr.aria-label]="social.label">
+            <app-icon [name]="social.icon" [size]="18" />
+          </a>
+        </li>
+      }
+      <li class="location">
+        <app-icon name="pin" [size]="16" />
+        {{ p.location }}
+      </li>
+      <li class="location">
+        <app-icon name="clock" [size]="16" />
+        <span><app-local-time [timeZone]="p.timeZone" /> {{ t.localTime }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="portrait" appReveal="200">
+    <div class="frame">
+      @if (p.avatar) {
+        <img
+          [src]="p.avatar"
+          [alt]="t.photoAlt + ' ' + p.name"
+          width="800"
+          height="1000"
+          fetchpriority="high"
+        />
+      } @else {
+        <span class="initials">{{ p.initials }}</span>
+      }
+    </div>
+    <div class="sticker" aria-hidden="true">
+      <img [src]="p.logo" alt="" width="84" height="84" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+@let p = i18n.profile();
+@let t = i18n.t();
+<section id="sobre-mi" class="section container">
+  <header class="section-head" appReveal>
+    <span class="section-index">03</span>
+    <h2>{{ t.nav.about }}</h2>
+  </header>
+
+  <div class="layout" appGlowCards>
+    <div class="text">
+      @for (paragraph of p.about; track $index) {
+        <p class="justify" [appReveal]="$index * 80">{{ paragraph }}</p>
+      }
+
+      <div class="facts" appReveal="120">
+        <div class="fact glow-card">
+          <h3>{{ t.about.education }}</h3>
+          <p class="strong">{{ p.education.degree }}</p>
+          <p>{{ p.education.school }} · {{ p.education.period }}</p>
+        </div>
+        <div class="fact glow-card">
+          <h3>{{ t.about.languages }}</h3>
+          @for (l of p.languages; track l.name) {
+            <p><span class="strong">{{ l.name }}</span> — {{ l.level }}</p>
+          }
+        </div>
+      </div>
+
+      <details class="courses glow-card" appReveal="160">
+        <summary>{{ t.about.courses }} ({{ p.courses.length }})</summary>
+        <ul>
+          @for (c of p.courses; track c) {
+            <li>{{ c }}</li>
+          }
+        </ul>
+      </details>
+    </div>
+
+    <div class="skills">
+      <h3 class="skills-title" appReveal>{{ t.about.skills }}</h3>
+      @for (group of p.skills; track $index; let i = $index) {
+        <div class="group glow-card" [appReveal]="i * 100">
+          <h4>{{ group.title }}</h4>
+          <ul class="tags">
+            @for (s of group.items; track s) {
+              <li class="tag">{{ s }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>
